@@ -513,6 +513,10 @@
     appearance: none;
 }
 
+.style-54 {
+    color: black;
+}
+
 @keyframes rotate-circle {
     0% {
         transform: rotate(-45deg);
