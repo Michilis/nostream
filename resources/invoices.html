@@ -241,29 +241,28 @@
         }
 
         const qrCodeElement = document.getElementById("invoice");
-        new QRCode(qrCodeElement, {
+        const qrCodeSize = 256;
+        const marginSize = 10;
+        const totalSize = qrCodeSize + marginSize * 2;
+
+        const qrCodeCanvas = document.createElement("canvas");
+        qrCodeCanvas.width = totalSize;
+        qrCodeCanvas.height = totalSize;
+
+        const qrCodeContext = qrCodeCanvas.getContext("2d");
+        qrCodeContext.fillStyle = "#FFFFFF";
+        qrCodeContext.fillRect(0, 0, totalSize, totalSize);
+
+        new QRCode(qrCodeCanvas, {
             text: `lightning:${invoice}`,
-            width: 256,
-            height: 256,
+            width: qrCodeSize,
+            height: qrCodeSize,
             correctLevel: QRCode.CorrectLevel.M
         });
 
-        // Add white background and margin to QR code
-        const qrCodeCanvas = qrCodeElement.getElementsByTagName("canvas")[0];
-        const context = qrCodeCanvas.getContext("2d");
-        const size = 256 + 10; // 256 is the QR code size, 10 for 5px margin on each side
+        qrCodeContext.drawImage(qrCodeCanvas, marginSize, marginSize, qrCodeSize, qrCodeSize);
 
-        const tempCanvas = document.createElement("canvas");
-        tempCanvas.width = size;
-        tempCanvas.height = size;
-        const tempContext = tempCanvas.getContext("2d");
-
-        tempContext.fillStyle = "#FFFFFF";
-        tempContext.fillRect(0, 0, size, size);
-        tempContext.drawImage(qrCodeCanvas, 5, 5, 256, 256);
-
-        context.clearRect(0, 0, qrCodeCanvas.width, qrCodeCanvas.height);
-        context.drawImage(tempCanvas, 0, 0);
+        qrCodeElement.appendChild(qrCodeCanvas);
 
         function copy() {
             var elem = document.getElementById('invoiceInput')
