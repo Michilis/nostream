@@ -35,7 +35,7 @@
                     <div class="row justify-content-center">
                         <div class="card pending col-8 col-lg-4 d-flex flex-column justify-content-center mb-4 style-33">
                             <div class="card-body m-auto">
-                                <div id="invoice" class="style-35" onclick="sendPayment()"></div>
+                                <div id="invoice" class="style-55" onclick="sendPayment()"></div>
                             </div>
                             <div class="card-body d-flex flex-row justify-content-center">
                                 <div class="input-group input-group-sm w-100 mw-256" onclick="copy()">
@@ -240,12 +240,30 @@
             }, expiry)
         }
 
-        new QRCode(document.getElementById("invoice"), {
+        const qrCodeElement = document.getElementById("invoice");
+        new QRCode(qrCodeElement, {
             text: `lightning:${invoice}`,
             width: 256,
             height: 256,
             correctLevel: QRCode.CorrectLevel.M
         });
+
+        // Add white background and margin to QR code
+        const qrCodeCanvas = qrCodeElement.getElementsByTagName("canvas")[0];
+        const context = qrCodeCanvas.getContext("2d");
+        const size = 256 + 10; // 256 is the QR code size, 10 for 5px margin on each side
+
+        const tempCanvas = document.createElement("canvas");
+        tempCanvas.width = size;
+        tempCanvas.height = size;
+        const tempContext = tempCanvas.getContext("2d");
+
+        tempContext.fillStyle = "#FFFFFF";
+        tempContext.fillRect(0, 0, size, size);
+        tempContext.drawImage(qrCodeCanvas, 5, 5, 256, 256);
+
+        context.clearRect(0, 0, qrCodeCanvas.width, qrCodeCanvas.height);
+        context.drawImage(tempCanvas, 0, 0);
 
         function copy() {
             var elem = document.getElementById('invoiceInput')
