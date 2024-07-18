@@ -14,6 +14,13 @@
             <main class="container">
                 <form method="post" action="/invoices">
                     <div class="row">
+                        <div class="col text-center">
+                            <a href="/" class="style-7">
+                                <img src="/assets/logo.png" alt="Noderunners Logo" class="style-8">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col">
                             <h1 class="mt-4 mb-4 text-center text-nowrap style-31">{{name}}</h1>
                         </div>
@@ -37,18 +44,18 @@
                         </div>
                     </div>
                     <div class="row justify-content-center">
-                        <div class="card col col-md-10 col-lg-6 mb-4 style-33">
+                        <div class="card col col-md-10 col-lg-6 mb-4 style-33" style="background-color: transparent;">
                             <div class="card-body">
                                 <div class="d-flex flex-column mb-4">
                                     <label for="pubkey" class="h5 style-49">Your Nostr public key</label>
                                     <input type="text" name="pubkey" class="form-control form-control-sm" id="pubkey" placeholder="npub... or hex..." pattern="^([0-9a-f]{64}|npub1[ac-hj-np-z02-9]+)$" required>
-                                    <div id="pubkeyAfterHelpBlock" class="form-text">
+                                    <div id="pubkeyAfterHelpBlock" class="form-text style-36">
                                         Hex or npub formats accepted.
                                     </div>
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" id="tosAccepted" name="tosAccepted" value="yes" required>
-                                    <label class="form-check-label" for="tosAccepted">
+                                    <label class="form-check-label style-36" for="tosAccepted">
                                         I have read and agree to the <a href="#" class="card-link style-48" data-bs-toggle="modal" data-bs-target="#tosModal">Terms of Service</a>
                                     </label>
                                 </div>
@@ -125,12 +132,15 @@
                             </p>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary style-39" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <footer class="style-52">
+            <p class="text-center style-36">Hosted by <a href="https://azzamo.net" class="style-48">Azzamo</a> (azzamo.net)</p>
+        </footer>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
     <script>
